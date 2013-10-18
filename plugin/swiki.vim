@@ -6,7 +6,7 @@ let g:swiki_loaded = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-command! -nargs=0 SWikiTagOpen call swiki#open_tag()
+command! -nargs=0 SWikiOpenTag call swiki#open_tag()
 
 
 
