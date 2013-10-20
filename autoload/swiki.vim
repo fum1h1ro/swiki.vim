@@ -5,10 +5,10 @@ set cpo&vim
 
 
 
-let g:SWikiTagBegin = '[['
-let g:SWikiTagEnd = ']]'
-let g:SWikiDirectory = '~/swiki'
-let g:SWikiExtention = '.txt'
+let g:swiki_tag_begin = '[['
+let g:swiki_tag_end = ']]'
+let g:swiki_directory = '~/swiki'
+let g:swiki_extention = '.txt'
 " hoge日本語[[test]][[]]
 function! swiki#open_tag()
     call s:open_tag()
@@ -30,8 +30,8 @@ function! s:open_tag()
 endfunction
 
 function! s:find_tag(text, startpos)
-    let rightpos = s:search_tag_end(a:text, a:startpos, g:SWikiTagEnd) - 1
-    let leftpos = s:search_tag_begin(a:text, rightpos, g:SWikiTagBegin) + strlen(g:SWikiTagBegin)
+    let rightpos = s:search_tag_end(a:text, a:startpos, g:swiki_tag_end) - 1
+    let leftpos = s:search_tag_begin(a:text, rightpos, g:swiki_tag_begin) + strlen(g:swiki_tag_begin)
     if leftpos >= 0 && rightpos >= 0
         return a:text[leftpos : rightpos]
     endif
@@ -65,15 +65,15 @@ function! s:is_http(name)
 endfunction
 
 function! s:make_filename(name)
-    return s:encode_filename(a:name) . g:SWikiExtention
+    return s:encode_filename(a:name) . g:swiki_extention
 endfunction
 
 function! s:make_path(name)
-    return g:SWikiDirectory . '/' . s:make_filename(a:name)
+    return g:swiki_directory . '/' . s:make_filename(a:name)
 endfunction
 
 function! s:dig_dir()
-    let dir = iconv(expand(g:SWikiDirectory), &encoding, 'UTF-8')
+    let dir = iconv(expand(g:swiki_directory), &encoding, 'UTF-8')
     if !isdirectory(dir)
         call mkdir(dir, 'p')
     endif
